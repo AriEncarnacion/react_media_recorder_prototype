@@ -1,7 +1,8 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import styles from '../styles/AudioPlayer.module.css'
 import {BsArrowLeftShort, BsArrowRightShort} from "react-icons/bs"
 import {FaPlay, FaPause} from "react-icons/fa"
+import {MdRestartAlt} from "react-icons/md"
 
 const AudioPlayer = () => {
   // state
@@ -48,7 +49,7 @@ const AudioPlayer = () => {
   }
 
   const changeRange = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
+    audioPlayer.current.currentTime = progressBar.current.value;
     changePlayerCurrentTime();
   }
 
@@ -58,26 +59,35 @@ const AudioPlayer = () => {
   }
 
   const backThirty = () => {
-    audioPlayer.current.currentTime = audioPlayer.current.currentTime - 30;
-    changeRange();
+    audioPlayer.current.currentTime = audioPlayer.current.currentTime - 10;
+    progressBar.current.value = audioPlayer.current.currentTime;
+    changePlayerCurrentTime();
   }
 
   const forwardThirty = () => {
-    audioPlayer.current.currentTime = audioPlayer.current.currentTime + 30;
-    changeRange();
+    audioPlayer.current.currentTime = audioPlayer.current.currentTime + 10;
+    progressBar.current.value = audioPlayer.current.currentTime;
+    changePlayerCurrentTime();
+  }
+
+  const restart = () => {
+    audioPlayer.current.currentTime = 0;
+    progressBar.current.value = 0;
+    changePlayerCurrentTime();
   }
 
   return (
     <div className={styles.audioPlayer}>
-      <audio onLoadedMetadata={onLoadedMetaData} ref={audioPlayer} src={"https://t4.bcbits.com/stream/e06302702f0bdad19e777dc8b8da268a/mp3-128/4008689699?p=0&ts=1635142621&t=20400199ae899045fea3daf1bc23904558fa37d7&token=1635142621_9a9b08e7fcb495026ed9a701b3a1edc8937dd628"} preload={"metadata"}/>
+      <audio onLoadedMetadata={onLoadedMetaData} ref={audioPlayer} src={"https://t4.bcbits.com/stream/d91f65c07ee53fcaea27068abdd31e1f/mp3-128/1014008581?p=0&ts=1635160938&t=9f653a5839cdd007295f28d2bdf5436044c87103&token=1635160938_6e7de04eb11720d47afd89cecb7893cd6efbe085"} preload={"metadata"}/>
 
-      <button className={styles.forwardBackward} onClick={backThirty}><BsArrowLeftShort/>30</button>
-
+      <button className={styles.restartSkip} onClick={restart}><MdRestartAlt></MdRestartAlt></button>
+      <button className={styles.forwardBackward} onClick={backThirty}><BsArrowLeftShort/>10</button>
       <button className={styles.playPause} onClick={togglePlayPause}>{
         isPlaying ? <FaPause/> : <FaPlay className={styles.play}/>
       }</button>
+      <button className={styles.forwardBackward} onClick={forwardThirty}>10<BsArrowRightShort/></button>
 
-      <button className={styles.forwardBackward} onClick={forwardThirty}>30<BsArrowRightShort/></button>
+
 
       {/* current time */}
       <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
