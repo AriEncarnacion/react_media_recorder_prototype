@@ -69,7 +69,7 @@ const AudioPlayer = () => {
 
   return (
     <div className={styles.audioPlayer}>
-      <audio onLoadedMetadata={onLoadedMetaData} ref={audioPlayer} src={"https://t4.bcbits.com/stream/e06302702f0bdad19e777dc8b8da268a/mp3-128/4008689699?p=0&ts=1635142621&t=20400199ae899045fea3daf1bc23904558fa37d7&token=1635142621_9a9b08e7fcb495026ed9a701b3a1edc8937dd628"} preload={"metadata"}/>
+      <audio onLoadedMetadata={onLoadedMetaData} ref={audioPlayer} src={"https://t4.bcbits.com/stream/8fa46302de0038d722200f913c34cb57/mp3-128/2958157925?p=0&ts=1635454485&t=0a77df45b715777619185e755f1308bc38d22ed2&token=1635454485_d96f01ed204fb8d144c47b22e7ad6d5bc36d158f"} preload={"metadata"}/>
 
       <button className={styles.forwardBackward} onClick={backThirty}><BsArrowLeftShort/>30</button>
 
